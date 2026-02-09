@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUVI × Kongu Engineering College | Vibe Coding Challenge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #fafbfc;
+            --bg-elevated: #ffffff;
+            --text-primary: #0f1419;
+            --text-secondary: #536471;
+            --accent-primary: #667eea;
+            --accent-secondary: #764ba2;
+            --accent-soft: #eef2ff;
+            --border-soft: rgba(102, 126, 234, 0.08);
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(102, 126, 234, 0.15);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 4px 16px rgba(102, 126, 234, 0.08);
+            --shadow-lg: 0 12px 40px rgba(102, 126, 234, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background Gradient */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(102, 126, 234, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.04) 0%, transparent 50%),
+                linear-gradient(135deg, #fafbfc 0%, #f5f7fa 100%);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(250, 251, 252, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-soft);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-separator {
+            width: 2px;
+            height: 24px;
+            background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-primary);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(3rem, 8vw, 6.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+
+        .hero-subtitle {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            animation: fadeInUp 0.8s ease-out 0.6s backwards;
+        }
+
+        .cta-primary {
+            display: inline-block;
+            padding: 1.1rem 3rem;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            animation: fadeInUp 0.8s ease-out 0.8s backwards;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Why Collaboration Section */
+        .why-section {
+            padding: 6rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-timeline: view();
+            animation-range: entry 0% cover 30%;
+        }
+
+        .section-header h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-timeline: view();
+            animation-range: entry 0% cover 30%;
+        }
+
+        .glass-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .glass-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .glass-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-primary);
+        }
+
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .glass-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .glass-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Tracks Section */
+        .tracks-section {
+            padding: 6rem 4rem;
+            background: var(--bg-elevated);
+            border-top: 1px solid var(--border-soft);
+            border-bottom: 1px solid var(--border-soft);
+        }
+
+        .tracks-scroll {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding: 1rem 0 2rem;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-primary) var(--accent-soft);
+        }
+
+        .tracks-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .tracks-scroll::-webkit-scrollbar-track {
+            background: var(--accent-soft);
+            border-radius: 4px;
+        }
+
+        .tracks-scroll::-webkit-scrollbar-thumb {
+            background: var(--accent-primary);
+            border-radius: 4px;
+        }
+
+        .track-card {
+            min-width: 320px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            scroll-snap-align: start;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-timeline: view();
+            animation-range: entry 0% cover 30%;
+        }
+
+        .track-card:hover {
+            transform: scale(1.03);
+            border-color: var(--accent-primary);
+        }
+
+        .track-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-soft);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .track-card h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .track-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 6rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-timeline: view();
+            animation-range: entry 0% cover 30%;
+        }
+
+        .stat-number {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Final CTA Section */
+        .final-cta {
+            padding: 8rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .final-cta h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-timeline: view();
+            animation-range: entry 0% cover 30%;
+        }
+
+        .cta-secondary {
+            display: inline-block;
+            padding: 1.25rem 3.5rem;
+            background: var(--text-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+            animation-timeline: view();
+            animation-range: entry 0% cover 30%;
+        }
+
+        .cta-secondary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 16px 48px rgba(15, 20, 25, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 4rem;
+            border-top: 1px solid var(--border-soft);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-primary);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-soft);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--accent-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.25rem 2rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .hero {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .why-section,
+            .tracks-section,
+            .stats-section {
+                padding: 4rem 2rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .final-cta {
+                padding: 5rem 2rem;
+            }
+
+            footer {
+                padding: 2rem;
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <span>GUVI</span>
+            <div class="logo-separator"></div>
+            <span>Kongu</span>
+        </div>
+        <div class="nav-links">
+            <a href="#why">Why</a>
+            <a href="#tracks">Tracks</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-badge">
+            🎯 Vibe Coding Partner
+        </div>
+        <h1>Where Campus<br>Meets Code.</h1>
+        <p class="hero-subtitle">GUVI × Kongu Engineering College — Empowering the next generation of builders</p>
+        <a href="#register" class="cta-primary">Start Your Journey</a>
+    </section>
+
+    <!-- Why Collaboration Section -->
+    <section id="why" class="why-section">
+        <div class="section-header">
+            <h2>Why This Works</h2>
+            <p>A partnership built on shared vision and complementary strengths</p>
+        </div>
+        <div class="cards-grid">
+            <div class="glass-card">
+                <div class="card-icon">🎓</div>
+                <h3>Academic Excellence</h3>
+                <p>Kongu Engineering College brings decades of technical education expertise, creating a foundation of rigorous learning and engineering discipline that shapes future innovators.</p>
+            </div>
+            <div class="glass-card">
+                <div class="card-icon">🚀</div>
+                <h3>Industry Relevance</h3>
+                <p>GUVI's cutting-edge curriculum bridges the gap between classroom theory and real-world tech demands, ensuring students build skills that matter in today's job market.</p>
+            </div>
+            <div class="glass-card">
+                <div class="card-icon">💡</div>
+                <h3>Innovation Culture</h3>
+                <p>Together, we foster an ecosystem where students don't just learn code—they build solutions, think critically, and prepare for the challenges of tomorrow's tech landscape.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tracks Section -->
+    <section id="tracks" class="tracks-section">
+        <div class="section-header">
+            <h2>Choose Your Track</h2>
+            <p>Four paths to mastery, all leading to industry readiness</p>
+        </div>
+        <div class="tracks-scroll">
+            <div class="track-card">
+                <div class="track-icon">⚡</div>
+                <h4>Full Stack Development</h4>
+                <p>Master both front-end and back-end technologies. Build complete web applications from database to deployment with modern frameworks and tools.</p>
+            </div>
+            <div class="track-card">
+                <div class="track-icon">🤖</div>
+                <h4>AI & Data Science</h4>
+                <p>Dive into machine learning, data analysis, and AI model development. Work with real datasets and create intelligent solutions that drive decisions.</p>
+            </div>
+            <div class="track-card">
+                <div class="track-icon">☁️</div>
+                <h4>Cloud Computing</h4>
+                <p>Learn cloud architecture, DevOps practices, and infrastructure as code. Deploy scalable applications on AWS, Azure, and Google Cloud Platform.</p>
+            </div>
+            <div class="track-card">
+                <div class="track-icon">🔒</div>
+                <h4>Cybersecurity</h4>
+                <p>Protect digital assets through ethical hacking, security protocols, and threat analysis. Become the guardian of tomorrow's digital infrastructure.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">Learn</div>
+                <div class="stat-label">Industry-grade skills from day one</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">Build</div>
+                <div class="stat-label">Real projects that matter</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">Collaborate</div>
+                <div class="stat-label">Connect with peers and mentors</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <h2>Enter Build Mode.</h2>
+        <a href="#register" class="cta-secondary">Register Now</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="logo">
+            <span>GUVI</span>
+            <div class="logo-separator"></div>
+            <span>Kongu Engineering College</span>
+        </div>
+        <div class="footer-links">
+            <a href="#about">About</a>
+            <a href="#privacy">Privacy</a>
+            <a href="#terms">Terms</a>
+            <a href="#support">Support</a>
+        </div>
+        <div class="footer-social">
+            <a href="#" class="social-icon">𝕏</a>
+            <a href="#" class="social-icon">in</a>
+            <a href="#" class="social-icon">yt</a>
+        </div>
+    </footer>
+
+</body>
+</html>
